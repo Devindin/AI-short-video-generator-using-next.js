@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <div>
       <h1>Devindi</h1>
-      <Button variant="destructive">Click me</Button>
+      <Button >Click me</Button>
       <UserButton/>
     </div>
   );
