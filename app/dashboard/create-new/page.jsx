@@ -8,6 +8,8 @@ import axios from 'axios'
 import CustomLoading from './_components/CustomLoading'
 import { v4 as uuidv4 } from 'uuid';
 
+const scriptData ='Time is a river, and history its current... flowing with tales of power, ambition, and fate. But sometimes, history takes a different path. This is the story'
+
 function CreateNew() {
   const [formData, setFormData] = useState({});
   const [loading, setLoading] = useState(false);
@@ -36,22 +38,26 @@ function CreateNew() {
 
   // Moved outside of onHandleInputChange
   const onCreateClickHandler = () => {
-    GetVideoScript()
+    //GetVideoScript()
+    GenerateAudioFile(scriptData);
   }
 
   const GenerateAudioFile=async(videoScriptData)=>{
+  setLoading(true);
    let script='';
    const id =uuidv4();
-   videoScriptData.forEach(item=>{
-    script = script+item.ContentText+' ';
-   })
+   //videoScriptData.forEach(item=>{
+   // script = script+item.ContentText+' ';
+   //})
 
    await axios.post('/api/generate-audio', {
-     text:script,
+     text:videoScriptData,
      id:id
    }).then(resp=>{
      console.log(resp.data);
    })
+
+   setLoading(false);
 
   }
 
